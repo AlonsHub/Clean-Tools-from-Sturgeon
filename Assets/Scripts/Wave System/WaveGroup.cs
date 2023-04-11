@@ -4,10 +4,7 @@ using UnityEngine;
 
 public class WaveGroup 
 {
-    [SerializeField]
-    EnemyGroup[] enemyGroups;
-    public void Spawn()
-    {
-        
-    }
+    public EnemyGroup[] enemyGroups;
+
+    
 }

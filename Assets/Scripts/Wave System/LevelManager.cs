@@ -8,6 +8,10 @@ public class LevelManager : MonoBehaviour
 
     List<WaveSpawner> _waveSpawners;
 
+    //Temp TBF
+    [SerializeField]
+    float _levelStartDelay = 0.2f;
+
     private void Awake()
     {
         if(Instance != null && Instance != this)
@@ -19,14 +23,19 @@ public class LevelManager : MonoBehaviour
         _waveSpawners = new List<WaveSpawner>();
     }
 
-    void Start()
+    public void RegisterWaveSpawner(WaveSpawner ws)
     {
-        
+        _waveSpawners.Add(ws);
     }
 
-    // Update is called once per frame
-    void Update()
+    void Start()
     {
-        
+        Invoke(nameof(StartLevel), _levelStartDelay);
+    }
+
+    void StartLevel()
+    {
+        int rnd = Random.Range(0, _waveSpawners.Count);
+        _waveSpawners[rnd].CallSpawnRandomWave();
     }
 }
