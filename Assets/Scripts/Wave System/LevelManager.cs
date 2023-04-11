@@ -35,7 +35,6 @@ public class LevelManager : MonoBehaviour
 
     void StartLevel()
     {
-        int rnd = Random.Range(0, _waveSpawners.Count);
-        _waveSpawners[rnd].CallSpawnRandomWave();
+        Helper.GetRandomElementFromList(_waveSpawners).CallSpawnRandomWave();
     }
 }
