@@ -31,10 +31,11 @@ public class WaveSpawner : MonoBehaviour
     public void CallSpawnRandomWave()
     {
         Debug.Log($"{name} began spawning.");
-        IsSpawnning = true;
 
         _currentWaveGroup = Helper.GetRandomElementFromArray(waveGroups);
-
+        _currentWaveGroup.SetAllTickers();
+        _currentWaveGroup.isLive = true;// should move to the init/SetAllTickers
+        IsSpawnning = true;
         TEMP_TIME.OnGameTimeTick += OnTick_SpawnCurrentWaveGroup;
     }
 
@@ -65,23 +66,25 @@ public class WaveSpawner : MonoBehaviour
         int doneCount = 0;
         foreach (var enemyGroup in _currentWaveGroup.enemyGroups)
         {
-            if (enemyGroup.spawnRate.x <= 0f)
+            if (enemyGroup.ticker.IsDone)
             {
                 doneCount++;
                 continue;
             }
-            enemyGroup.tick++;
-            if(enemyGroup.tick >= enemyGroup.spawnRate.y)
+            //enemyGroup.tick++;
+            //if(enemyGroup.tick >= enemyGroup.spawnRate.y)
+            if (enemyGroup.ticker.DoTick())
             {
-                enemyGroup.tick = 0f;
+                //enemyGroup.tick = 0f;
                 GameObject go = Instantiate(enemyGroup.prefab, Helper.GetRandomElementFromArray(spawnPositions));
-                enemyGroup.spawnRate.x--; //to reduce the remaining enemies to spawn - likely temp. TBF
+                //enemyGroup.spawnRate.x--; //to reduce the remaining enemies to spawn - likely temp. TBF - should be a part of the ticker
             }
         }
         if (doneCount == _currentWaveGroup.enemyGroups.Length)
         {
             Debug.Log($"{name} completed spawning and is unsubbing from tick");
             IsSpawnning = false;
+            _currentWaveGroup.isLive = false;
             TEMP_TIME.OnGameTimeTick -= OnTick_SpawnCurrentWaveGroup;
         }
     }

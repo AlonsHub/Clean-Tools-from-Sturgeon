@@ -315,6 +315,7 @@ MonoBehaviour:
         type: 3}
       spawnRate: {x: 5, y: 2}
       tick: 0
+    isLive: 0
   IsSpawnning: 0
 --- !u!1 &248752713
 GameObject:
@@ -572,6 +573,7 @@ MonoBehaviour:
         type: 3}
       spawnRate: {x: 6, y: 1}
       tick: 0
+    isLive: 0
   IsSpawnning: 0
 --- !u!1 &705507993
 GameObject:

@@ -10,4 +10,6 @@ public class EnemyGroup
     public Vector2Int spawnRate;
 
     public float tick = 0f;
+
+    public Ticker ticker;
 }

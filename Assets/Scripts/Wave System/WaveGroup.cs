@@ -6,11 +6,21 @@ public class WaveGroup
 {
     public EnemyGroup[] enemyGroups;
 
-    public void TickAllGroups()
+    public bool isLive;
+
+    public void SetAllTickers()
     {
         foreach (var item in enemyGroups)
         {
-            item.tick++;
+            item.ticker.Init(item.spawnRate.y, item.spawnRate.x);
         }
     }
+
+    //public void TickAllGroups()
+    //{
+    //    foreach (var item in enemyGroups)
+    //    {
+    //        item.tick++;
+    //    }
+    //}
 }
