@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 
 [System.Serializable]
@@ -17,6 +18,9 @@ public class WaveSpawner : MonoBehaviour
     WaveGroup _currentWaveGroup;
     EnemyGroup _currentEnemyGroup;
 
+
+    public UnityEvent OnSpawnStart;
+    public UnityEvent OnSpawnEnd;
     //Should either Sub to LevelManager -> or report themeselves and then do nothing "of their own accord"
     private void Start()
     {
@@ -37,6 +41,7 @@ public class WaveSpawner : MonoBehaviour
         _currentWaveGroup.SetAllTickers();
         _currentWaveGroup.isLive = true;// should move to the init/SetAllTickers
         IsSpawnning = true;
+        OnSpawnStart.Invoke();
         TEMP_TIME.OnGameTimeTick += OnTick_SpawnCurrentWaveGroup;
     }
 
@@ -85,6 +90,7 @@ public class WaveSpawner : MonoBehaviour
         {
             Debug.Log($"{name} completed spawning and is unsubbing from tick");
             IsSpawnning = false;
+            OnSpawnEnd.Invoke();
             _currentWaveGroup.isLive = false;
             TEMP_TIME.OnGameTimeTick -= OnTick_SpawnCurrentWaveGroup;
         }
