@@ -72,8 +72,9 @@ public class LevelManager : MonoBehaviour
                 if (ws.IsSpawnning) //This may call the same spawner twice - sometimes causing less simultanious spawners than max
                 {
                     Debug.Log($"{ws.name} is aleady spawning!");
+                    continue;
                 }
-                Helper.GetRandomElementFromList(_waveSpawners).CallSpawnRandomWave();
+                ws.CallSpawnRandomWave();
                 _waveCount--;
             }
             yield return new WaitUntil(AreAllSpawnersDone);
