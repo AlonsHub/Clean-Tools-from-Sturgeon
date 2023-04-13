@@ -45,25 +45,6 @@ public class WaveSpawner : MonoBehaviour
         TEMP_TIME.OnGameTimeTick += OnTick_SpawnCurrentWaveGroup;
     }
 
-    IEnumerator SpawnRandomWaveGroup()
-    {
-        Debug.Log($"{name} began spawning.");
-        IsSpawnning = true;
-
-        _currentWaveGroup = Helper.GetRandomElementFromArray(waveGroups);
-
-        foreach (var enemyGroup in _currentWaveGroup.enemyGroups)
-        {
-            for (int i = 0; i < enemyGroup.spawnRate.x; i++)
-            {
-                GameObject go = Instantiate(enemyGroup.prefab, Helper.GetRandomElementFromArray(spawnPositions).position, transform.rotation);
-                yield return new WaitForSeconds(enemyGroup.spawnRate.y); //TBF - INSTEAD OF THIS - SUB TO TICK!
-            }
-        }
-        Debug.Log($"{name} has finished spawning.");
-        IsSpawnning = false;
-        _currentWaveGroup = null;
-    }
 
     //happens every game-tick
     void OnTick_SpawnCurrentWaveGroup()

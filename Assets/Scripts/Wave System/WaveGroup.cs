@@ -15,12 +15,4 @@ public class WaveGroup
             item.ticker.Init(item.spawnRate.y, item.spawnRate.x);
         }
     }
-
-    //public void TickAllGroups()
-    //{
-    //    foreach (var item in enemyGroups)
-    //    {
-    //        item.tick++;
-    //    }
-    //}
 }

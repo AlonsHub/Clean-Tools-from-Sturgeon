@@ -18,6 +18,9 @@ public class LevelManager : MonoBehaviour
     //Temp TBF
     [SerializeField]
     float _levelStartDelay = 0.2f;
+    [SerializeField]
+    float _interwaveDelay;
+
 
     private void Awake()
     {
@@ -46,15 +49,14 @@ public class LevelManager : MonoBehaviour
     void StartLevel()
     {
         StartCoroutine(nameof( LevelLoop));
-
     }
 
     bool AreAllSpawnersDone()
     {
         bool toReturn = true;
-        foreach (var item in _waveSpawners)
+        foreach (var waveSpawner in _waveSpawners)
         {
-            if(item.IsSpawnning)
+            if(waveSpawner.IsSpawnning)
             {
                 toReturn = false;
             }
@@ -76,6 +78,7 @@ public class LevelManager : MonoBehaviour
                 }
                 ws.CallSpawnRandomWave();
                 _waveCount--;
+                yield return new WaitForSecondsRealtime(_interwaveDelay);
             }
             yield return new WaitUntil(AreAllSpawnersDone);
         }
