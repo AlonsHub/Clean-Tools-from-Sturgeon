@@ -30,6 +30,7 @@ public class WaveSpawner : MonoBehaviour
     //}
     public void CallSpawnRandomWave()
     {
+        
         Debug.Log($"{name} began spawning.");
 
         _currentWaveGroup = Helper.GetRandomElementFromArray(waveGroups);

@@ -8,6 +8,6 @@ public class MoveToCenter : MonoBehaviour
     float speed;
     void Update()
     {
-        transform.Translate(-1f * transform.position * speed* Time.deltaTime); //moves to center   
+        transform.Translate((Vector3.zero-transform.position) * speed* Time.deltaTime, Space.World); //moves to center   
     }
 }
