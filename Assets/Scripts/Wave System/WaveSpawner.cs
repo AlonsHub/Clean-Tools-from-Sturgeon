@@ -56,7 +56,7 @@ public class WaveSpawner : MonoBehaviour
         {
             for (int i = 0; i < enemyGroup.spawnRate.x; i++)
             {
-                GameObject go = Instantiate(enemyGroup.prefab, Helper.GetRandomElementFromArray(spawnPositions));
+                GameObject go = Instantiate(enemyGroup.prefab, Helper.GetRandomElementFromArray(spawnPositions).position, transform.rotation);
                 yield return new WaitForSeconds(enemyGroup.spawnRate.y); //TBF - INSTEAD OF THIS - SUB TO TICK!
             }
         }
